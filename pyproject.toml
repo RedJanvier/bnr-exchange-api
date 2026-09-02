@@ -1,0 +1,17 @@
+[project]
+name = "bnr-exchange-api"
+version = "1.0.0"
+description = "Free, open exchange-rate API for the Rwandan Franc, sourced from the National Bank of Rwanda."
+requires-python = ">=3.11"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "B", "UP"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+filterwarnings = ["ignore::DeprecationWarning"]

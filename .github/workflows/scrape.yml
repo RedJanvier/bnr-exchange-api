@@ -1,0 +1,63 @@
+name: Scrape BNR rates
+
+# Fetch fresh National Bank of Rwanda rates and commit them into the repo (git-as-DB).
+# BNR publishes on business days in the afternoon (~16:00-18:00 CAT), so we run in the
+# late afternoon Kigali time (CAT = UTC+2) on weekdays to capture the same day's rate.
+on:
+  schedule:
+    - cron: "0 15 * * 1-5" # 15:00 UTC = 17:00 CAT (Africa/Kigali), Mon-Fri
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "daily (last ~10 days) or backfill (a date range)"
+        type: choice
+        options: [daily, backfill]
+        default: daily
+      start:
+        description: "Backfill start date (YYYY-MM-DD); default 2026-01-01"
+        required: false
+      end:
+        description: "Backfill end date (YYYY-MM-DD); default today"
+        required: false
+
+concurrency:
+  group: scrape
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+
+      - name: Fetch rates
+        run: |
+          if [ "${{ github.event.inputs.mode }}" = "backfill" ]; then
+            ARGS="--backfill"
+            [ -n "${{ github.event.inputs.start }}" ] && ARGS="$ARGS --start ${{ github.event.inputs.start }}"
+            [ -n "${{ github.event.inputs.end }}" ] && ARGS="$ARGS --end ${{ github.event.inputs.end }}"
+          else
+            ARGS="--daily"
+          fi
+          echo "Running: python -m app.ingest.run $ARGS"
+          python -m app.ingest.run $ARGS
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data
+          if git diff --cached --quiet; then
+            echo "No rate changes to commit."
+          else
+            git commit -m "data: update BNR exchange rates ($(date -u +%Y-%m-%d))"
+            git push
+          fi

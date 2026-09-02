@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BNR Exchange Rates &middot; Rwandan Franc API</title>
+    <meta
+      name="description"
+      content="Free, open exchange-rate API for the Rwandan Franc, sourced from the National Bank of Rwanda."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">RWF</span>
+          <div>
+            <h1>BNR Exchange Rates</h1>
+            <p class="tagline">Official National Bank of Rwanda rates &mdash; free &amp; open API</p>
+          </div>
+        </div>
+        <nav class="links">
+          <a href="/docs">API docs</a>
+          <a href="https://github.com/RedJanvier/bnr-exchange-api">GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="card converter" aria-labelledby="convert-heading">
+        <h2 id="convert-heading">Convert</h2>
+        <div class="converter-grid">
+          <div class="field">
+            <label for="amount">Amount</label>
+            <input id="amount" type="number" inputmode="decimal" value="1" min="0" step="any" />
+          </div>
+          <div class="field">
+            <label for="from">From</label>
+            <select id="from"></select>
+          </div>
+          <button id="swap" class="swap" type="button" title="Swap currencies" aria-label="Swap currencies">
+            &#8646;
+          </button>
+          <div class="field">
+            <label for="to">To</label>
+            <select id="to"></select>
+          </div>
+        </div>
+        <output id="result" class="result" aria-live="polite">&nbsp;</output>
+        <p id="as-of" class="as-of"></p>
+      </section>
+
+      <section class="card" aria-labelledby="table-heading">
+        <div class="table-head">
+          <h2 id="table-heading">Latest rates</h2>
+          <label class="base-picker">
+            1 <select id="base"></select> =
+          </label>
+        </div>
+        <div class="table-scroll">
+          <table id="rates-table">
+            <thead>
+              <tr><th scope="col">Currency</th><th scope="col">Code</th><th scope="col" class="num">Rate</th></tr>
+            </thead>
+            <tbody id="rates-body">
+              <tr><td colspan="3" class="muted">Loading&hellip;</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap site-footer">
+      <p>
+        Data: <a href="https://www.bnr.rw/exchangeRate">National Bank of Rwanda</a>.
+        Reference rates (mid). Published weekdays; weekend/holiday requests carry forward the
+        last published rate. Inspired by <a href="https://frankfurter.dev">frankfurter</a>.
+      </p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
