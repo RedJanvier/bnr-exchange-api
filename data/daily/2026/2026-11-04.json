@@ -1,0 +1,87 @@
+{
+  "date": "2026-11-04",
+  "pivot": "RWF",
+  "provider": "BNR",
+  "rates": {
+    "AED": {
+      "average": 402.046271,
+      "buying": 400.684856,
+      "selling": 403.407686
+    },
+    "AUD": {
+      "average": 1029.689576,
+      "buying": 1026.202826,
+      "selling": 1033.176326
+    },
+    "BIF": {
+      "average": 0.493914,
+      "buying": 0.492242,
+      "selling": 0.495587
+    },
+    "CAD": {
+      "average": 1056.810568,
+      "buying": 1053.23198,
+      "selling": 1060.389155
+    },
+    "CHF": {
+      "average": 1807.645264,
+      "buying": 1801.524189,
+      "selling": 1813.766339
+    },
+    "CNY": {
+      "average": 220.826221,
+      "buying": 220.078456,
+      "selling": 221.573986
+    },
+    "EUR": {
+      "average": 1658.046068,
+      "buying": 1652.431567,
+      "selling": 1663.660568
+    },
+    "GBP": {
+      "average": 1986.510176,
+      "buying": 1979.783426,
+      "selling": 1993.236926
+    },
+    "INR": {
+      "average": 15.589679,
+      "buying": 15.536889,
+      "selling": 15.642469
+    },
+    "JPY": {
+      "average": 2082.620443,
+      "buying": 2075.568243,
+      "selling": 2089.672643
+    },
+    "KES": {
+      "average": 11.362245,
+      "buying": 11.32377,
+      "selling": 11.40072
+    },
+    "SAR": {
+      "average": 393.360318,
+      "buying": 392.028316,
+      "selling": 394.692321
+    },
+    "TZS": {
+      "average": 0.556669,
+      "buying": 0.554784,
+      "selling": 0.558554
+    },
+    "UGX": {
+      "average": 0.34921,
+      "buying": 0.348027,
+      "selling": 0.350392
+    },
+    "USD": {
+      "average": 1476.575,
+      "buying": 1471.575,
+      "selling": 1481.575
+    },
+    "ZAR": {
+      "average": 88.892768,
+      "buying": 88.591758,
+      "selling": 89.193778
+    }
+  }
+}
